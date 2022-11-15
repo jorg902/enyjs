@@ -1,0 +1,46 @@
+<nav class="navbar">
+   <div class="navbar-brand">
+      <span class="navbar-item" onclick="irA('/inicio'); return false;">
+         <img src="./images/text236.png"  width="112" height="28">
+      </span>
+      <span class="navbar-burger burge" id="movil">
+         <span></span>
+         <span></span>
+         <span></span>
+      </span>
+   </div>
+   <div class="navbar-menu" id="listaMenu">
+      <div class="navbar-start">
+         <span class="navbar-item">
+            <i class="ti-cloud-down"></i>&nbsp;Actualizando bandeja...
+         </span>
+         <span class="navbar-item">
+            <progress class="progress is-success is-small" value="" max="100" id="barraProgresiva" style="display:none;">33%</progress>
+         </span>
+      </div>
+      <div class="navbar-end">
+         <span class="navbar-item" onclick="irA('/configurar'); return false;" >
+            <i class="ti-settings"></i>&nbsp;
+            Configuracion
+         </span>
+         <span class="navbar-item" onclick="irA('/reportesMail'); return false;">
+            <i class="ti-agenda"></i>&nbsp;
+            Reportes
+         </span>
+         <span class="navbar-item has-text-grey" ><i class="ti-face-smile"></i>&nbsp;<span id="usuario-name" ><%= usuario %></span></span>
+         <span class="navbar-item has-text-primary-dark" onclick="irA('/salir'); return false;" >
+               <i class="ti-share-alt"></i>&nbsp;Salir
+         </span>
+      </div>
+   </div>
+</nav>
+<script>
+   document.querySelector('#movil').addEventListener('click',(e)=>{
+      e.preventDefault();
+      document.querySelector('#listaMenu').classList.toggle('is-active');
+   })
+
+   function irA(sitio){
+      window.location.href=sitio;
+   }
+</script>

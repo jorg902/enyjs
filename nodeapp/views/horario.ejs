@@ -1,0 +1,22 @@
+<div class="block">
+   <div class="p-5" style="box-shadow: 0px 0px 1px 1px #cecece;" >
+      <span class="p-3 has-background-warning-light">
+         Nota:
+         <small>Debe ser en formato de 24 horas ejemplo: ( 00:00:00 = HH:mm:ss )</small>
+      </span>
+      <br><br>
+      <div class="field">
+         <label class="label">Start</label>
+         <input class="input" type="text" value="<%= horario[0] %>" name="start_" id="start_">
+      </div>
+      <div class="field">
+         <label class="label">End</label>
+         <input class="input" type="text" value="<%= horario[1] %>" name="end_" id="end_">
+      </div>
+      <div>
+         <button class="button is-info" onclick="updateTimeToWork(); return false;">
+            <i class="ti-save"></i>&nbsp;&nbsp;Save
+         </button>
+      </div>
+   </div>
+</div>

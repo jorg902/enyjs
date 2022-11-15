@@ -1,0 +1,296 @@
+<!--
+   inicio.ejs
+
+   Copyright 2022 jorgepech <jorgepech@PCSIS-JORGE>
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+
+
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+
+<head>
+	<title>
+		<%= title %>
+	</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.2/base64.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/themify-icons/themify-icons.css">
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<script src="./javascripts/moment-with-locales.js"></script>
+</head>
+
+<body>
+	
+	<!-- incluye menu-->
+	<%- include('menu') %>
+	<!-- fin del menu -->
+
+	<!-- seccion del modal -->
+	<div class="modal" >
+		<div class="modal-background" id="bgmodal" ></div>
+		<div class="modal-content" id="contenido-modal" style="width: 80%; margin-left: 10%; height:auto;"></div>
+  </div>
+
+	<div class="columns" >
+		<div class="column is-4" >
+			<!-- muestra el precontenido del los correos -->
+			<div>
+				<input type="hidden" name="correoUno" value="<%= JSON.stringify(correos); %>" id="correoUno">
+				<input type="hidden" name="nombrecompleto" value="<%= nombrecompleto %>" id="nombrecompleto">
+			</div>
+			<div class="buttons has-addons" style="width: 100%;">
+				<button class="button is-success is-outlined" style="width: 33%;" id="btn-reload" onclick="btnLoadActive(); return false;">
+					<i class="ti-email"></i>
+					&nbsp;&nbsp;
+					<b>Ver todo</b>
+				</button>
+				<button class="button is-danger is-outlined" style="width: 33%;" id="btn-close" onclick="btnClosedActive(); return false;" >
+					<i class="ti-close"></i>&nbsp;&nbsp;
+					Cerrados
+				</button>
+				<button class="button is-primary is-outlined" style="width: 33%;" id="btn-newEmail" onclick="modalNewMail(); return false;" >
+					<i class="ti-plus"></i>&nbsp;&nbsp;
+					Nuevo
+				</button>
+			 </div>
+			 <div class="columns">
+				<div class="column is-8">
+					<input class="input" type="text" placeholder="buscarEmail@.com.mx..." value="" onkeyup="search()" id="campobusqueda" />
+				</div>
+				<div class="column is-4">
+					<button class="button" style="width: 100%;" id="btn-finder" onclick="findEmailByIdAndSubject(); return false;" >
+						<i class="ti-server"></i>&nbsp;&nbsp;
+						Buscar BD
+					</button>
+				</div>
+			 </div>
+			<div id="todosLosCorreos"></div>
+			<aside class="menu" >
+				<ul class="menu-list" id="listMenu" style="max-height: 59vh; overflow-y:auto;">
+					<!-- template -->
+				</ul>
+				<div class="field has-addons" style="width: 50%; margin-left:25%;">
+					<p class="control">
+					  <button class="button" id="before-btn" onclick="clickBefore(); return false;" disabled="true" >
+						 <span class="icon is-small">
+							<i class="ti-angle-left"></i>
+						 </span>
+					  </button>
+					</p>
+					<p class="control">
+					  <button class="button is-success has-text-weight-bold has-text-white" id="now-btn">1</button>
+					</p>
+					<p class="control">
+					  <button class="button" id="after-btn" onclick="clickNext(); return false;" disabled="true">
+						 <span class="icon is-small">
+							<i class="ti-angle-right"></i>
+						 </span>
+					  </button>
+					</p>
+				 </div>
+			</aside>
+		</div>
+
+		<div class="column is-8" style="height: auto; max-height: 90vh;" id="lateralDerecho">
+			<!-- muestra el contenido del correo selecionado.-->
+			<div id="cuerpoDeCorreo" style="height:auto; max-height:85vh; width: 990px; overflow-y:auto; padding:2%;" ></div>
+			<script id="mimefile" type="x-tmpl-mustache" ><div>{{&mimefile}}</div></script>
+
+			<script id="emailBody" type="x-tmpl-mustache">
+				<div class="tags has-addons">
+					<p class="tag subtitle is-5 is-primary">{{id}}</p>
+					<p class="tag subtitle is-5 has-text-primary-dark has-text-weight-bold">{{subject}}</p>
+				</div>
+				
+				<div class="media">
+					<div class="media-left">
+					  	<figure class="image is-48x48">
+							<img src="{{src}}" alt="Placeholder image">
+					  	</figure>
+					</div>
+					<div class="media-content">
+					  	<p class="title is-5">{{from}}</p>
+					  	<p class="subtitle is-6"><b>Para:</b>&nbsp;{{to}}</p>
+					  	<p class="subtitle is-6"><b>cc:</b>&nbsp;{{cc}}</p>
+					</div>
+					<div class="media-right">
+						<div class="columns">
+							<div class="column is-4">
+								<span style="margin-right:10px;"><b>{{date}}</b></span>
+							</div>
+							<div class="column is-6">
+								<a class="button is-primary has-text-weight-bold" 
+									style="display:{{displayBtn1}}; width:100%;" 
+									onclick="modalResponderA('{{folioemail}}',{{id}},'{{subject}}','{{from}}','{{messageId}}','{{date}}','{{cc}}','{{to}}', '{{references}}',0 ); return false;" >
+									<i class="ti-pencil-alt"></i>&nbsp;Atender
+								</a>
+								<a class="button is-info has-text-weight-bold" 
+								style="display:{{displayBtn2}}; width:100%;" 
+								onclick="getRespuestaEnviada({{id}}); return false;" >
+									<i class="ti-eye"></i>&nbsp;M.cierre
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="columns">
+					<div class="column is-2" >
+						<div class="subtitle is-6" >
+							<b><p><i class="ti-files"></i>&nbsp;&nbsp;Adjuntos:</p></b>
+						</div>
+					</div>
+					<div class="column is-10">
+						<div id="AttachmentId" style="width:100%;">
+							{{&attach}}
+						</div>
+					</div>
+				</div>
+				</br>
+				<div style="width:100%;" id="bodyMailComplete" >{{&html}}</div>
+	    	</div>
+	 		</script>
+		</div>
+	</div>
+
+	<script id="dbemail" type="x-tmpl-mustache">
+		<li id="{{id}}" title="{{from}}" value="{{asunto}}" >
+			<a style="height:60px; border:1px #abe5cb solid;" onclick="openMail('{{folioemail}}','{{rutaFile}}',{{id}},'{{asunto}}','{{from}}','{{to}}','{{messageid}}','{{receivedDate}}','{{estado}}'); return false;">
+				<div style="width: 100%;">
+					<div style="width: 70%; float: left;">
+						<strong style="width: 20%;">{{id}}</strong>&nbsp;
+						<i class="ti-email" style="width: 5%;"></i>
+						<strong class="has-text-weight-bold" style="font-size:1rem; width: 50%;" title="{{from}}" >&nbsp;{{from_}}</strong>
+					</div>
+					<div style="width:30%; float: right;">
+						<small class="tag is-white has-text-dark"  style="width: 100%;" >{{receivedDate}}</small>
+					</div>
+					
+					<div style="width:80%; float: left;" >
+						<span class="has-text-success">{{subject}}...</span>
+					</div>
+					<div style="width:20%; float: right;" >
+						<strong class="has-text-success" style="text-align:right;">&nbsp;{{estado}}</strong>
+					</div>
+				</div>
+			</a>
+		</li>
+	</script>
+	<script id="preEmail" type="x-tmpl-mustache"  >
+		<article class="media {{class}}" onclick="viewMail('{{messageId}}',{{id}},'{{estado}}'); return false;" title="{{id}}{{title}}" >
+			<div class="media-left">
+			  <p class="has-text-primary" >
+				 <b class="subtitle is-5 has-background-primary has-text-white p-1" >{{id}}</b><br>
+				 <small>
+					<i style="display:{{display}}; float:right; font-size:1.5rem; padding-top:10px;" class="ti-clip has-text-grey" ></i>
+				</small>
+			  </p>
+			</div>
+			<div class="media-content">
+				  <div class="content">
+					 <p>
+						<strong class="has-text-primary-dark" style="font-size:1.1rem;" >{{subject}}...</strong>
+						<br>
+						<small style="font-size:0.9rem;" >{{from}}</small>
+						<small style="float:right;"><strong>{{date}}</strong></small>
+						<br>
+						<small class="has-text-info" style="font-size:0.8rem;">{{user}}::<i>{{text}}...</i></small>
+					 </p>
+				  </div>
+			</div>
+		 </article>
+	</script>
+
+	<!-- palntilla para los attchament en el cuerpo de correo-->
+	<script id="attachId" type="x-tmpl-mustache">
+		<div style="width:120px; height:70px; float:left; padding:5px;" title="{{fileName}}">
+			<a href="{{contenido}}" download="{{fileName}}" >
+				<figure class="image is-32x32" style="float:left; margin-left:10px;">
+					<img src="{{img}}" >
+					<figcaption style="color:##00947e;"><small>{{tag}}...</small></figcaption>
+				</figure>
+			</a>
+		</div>	
+	</script> 
+
+	<script id="detallesderespuesta" type="x-tmpl-mustache">
+		<article class="message is-info">
+			<div class="message-header">
+				<div class="tags has-addons">
+					<span class="tag is-dark subtitle is-4">{{id}}</span>
+					<span class="tag subtitle is-4">{{subject}}</span>
+				 </div>
+			</div>
+			<div class="message-body">
+				<div class="columns">
+					<div class="column is-8">
+						<p class="has-text-left"><strong>De:</strong>&nbsp;{{findEmail}}</p>
+					</div>
+					<div class="column is-4">
+						<p class="has-text-right" ><strong>Enviado:</strong>&nbsp;{{receivedDate}}</p>
+					</div>
+				</div>
+				<div style="width:100%; padding:0%;">
+					<p><b>Se atendió</b>&nbsp;{{fechaderespuesta}}</p>
+					<p><b>Codificado como:</b>&nbsp;{{codificacion}}</p>
+				</div>
+				<div style="width:100%; height:10vh; padding:1%;">
+					<p><b>Adjuntos</b></p>
+					{{&links}}
+				</div>
+				<hr>
+				<div>
+					<strong>Respuesta enviada:</strong>
+					<p>{{respuesta}}</p>
+				</div>
+			</div>
+		</article>
+	</script>
+
+	<div class="columns">
+		<div class="column is-12">
+			<span class="has-text-grey"><i>
+				<span class="has-text-primary-dark has-text-weight-bold">E</span>mail 
+				<span class="has-text-primary-dark has-text-weight-bold">U</span>sing
+				<span class="has-text-primary-dark has-text-weight-bold">N</span>odemailer.js and
+				<span class="has-text-primary-dark has-text-weight-bold">Y</span>apople.js by 
+				<span class="has-text-primary-dark has-text-weight-bold">J</span>orge
+				<span class="has-text-primary-dark has-text-weight-bold">P</span>ech</i>
+			</span>
+		</div>
+	</div>
+	<!-- secciones de js y jqyery -->
+	<script type="text/javascript" src="./javascripts/JQuery360.js"></script>
+	<script type="text/javascript" src="./javascripts/mustache.min.js"></script>
+	<script> 
+		const bgmodal = document.querySelector('#bgmodal')
+      const modal = document.querySelector('.modal')
+		var contentModal = document.querySelector('#contenido-modal');
+		bgmodal.addEventListener('click',()=>{
+			modal.classList.remove('is-active')
+		})
+	</script>
+	<script type="text/javascript" src="./javascripts/newEmail.js"></script>
+	<script type="text/javascript" src="./javascripts/inicio.limpio.js"></script>
+	
+</body>
+
+</html>

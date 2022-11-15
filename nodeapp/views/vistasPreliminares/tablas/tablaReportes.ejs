@@ -1,0 +1,30 @@
+<table class="table is-bordered">
+    <thead>
+        <tr>
+            <th>FOLIO</th>
+            <th>CATEGORÍA</th>
+            <th>USUARIO</th>
+            <th>REPORTE</th>
+            <th>ESTADO</th>
+            <th>CODIFICACIÓN</th>
+            <th>FECHA ALTA</th>
+            <th>FECHA RESPUESTA</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% resultados.forEach( item => {<%>
+            <tr>
+                <td><p><%= resultados.id %></p></td>
+                <td><%= resultados.subject%></td>
+                <td><%= resultados.user%></td>
+                <td><%= resultados.text_%></td>
+                <td><%= resultados.estado%></td>
+                <td><%= resultados.codificacion%></td>
+                <td><%= resultados.date_ %></td>
+                <td><%= resultados.fechaderespuesta %></td>
+                <td><button class="button is-warning" id="descargar">Descargar</button></td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>

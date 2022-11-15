@@ -1,0 +1,17 @@
+<div class="block has-background-white p-5">
+   <h3 class="title is-3" ><%= titleFile %></h3>
+   <div class="field">
+      <label class="label">Email</label>
+      <input class="input" type="text" value="<%= usernameFile  %>" name="usertxt" id="usertxt" placeholder="myEmail@mail.telcel.com" <%= esDeLectura %> >
+      <input type="hidden" value="<%= fileUpdate  %>" name="fileUpdate" id="fileUpdate" >
+   </div>
+   <div class="field">
+      <label class="label">Password</label>
+      <input class="input" type="password" value="<%= passwordFile  %>" name="passtxt" id="passtxt" placeholder="add password.." >
+   </div>
+   <div class="field">
+      <button class="button is-primary" onclick="saveOrUpdateFile(); return false;">
+         <i class="ti-save"></i>&nbsp;&nbsp;Save
+      </button>
+   </div>
+</div>

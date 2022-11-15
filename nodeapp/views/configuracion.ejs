@@ -1,0 +1,95 @@
+<!--
+   configuracion.ejs
+
+   Copyright 2022 jorgepech <jorgepech@PCSIS-JORGE>
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title><%= title %></title>
+   <link rel="stylesheet" href="/themify-icons/themify-icons.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+   <link rel='stylesheet' href='/stylesheets/style.css' />
+	<script src="./javascripts/moment-with-locales.js"></script>
+</head>
+<body>
+   <!-- incluye menu-->
+	<%- include('menu') %>
+	<!-- fin del menu -->
+
+   <!-- /cuerpo de contenido \-->
+
+   <div class="columns">
+      <div class="column is-3">
+         <div class="content">
+            <div class="field">
+               <h4 class="title is-4 has-text-left pt-2">Elementos a configurar</h4>
+               <button class="button has-background-white-ter" style="width: 100%;" onclick="getMailTxt(); return false;">
+                  <i class="ti-eye"></i>&nbsp;&nbsp;Get email file
+               </button>
+               <button class="button has-background-white-ter" style="width: 100%;" onclick="newEmailFile(); return false;">
+                  <i class="ti-file"></i>&nbsp;&nbsp;Make a new email file
+               </button>
+               <button class="button has-background-white-ter" style="width: 100%;" onclick="getTimeToWork(); return false;">
+                  <i class="ti-pencil"></i>&nbsp;&nbsp;Edit time to work!
+               </button>
+               <button class="button has-background-white-ter" style="width: 100%;" onclick="getBlackList(); return false;">
+                  <i class="ti-pencil"></i>&nbsp;&nbsp;Edit black-list mail
+               </button>
+               <button id="closeSection" class="button has-background-white-ter" style="width: 100%; " onclick="addStaff(); return false;">
+                  <i class="ti-plus"></i>&nbsp;&nbsp;add New Member
+               </button>
+               <button id="closeSection" class="button has-background-white-ter" style="width: 100%; display: none;" onclick="closeSection(); return false;">
+                  <i class="ti-close"></i>&nbsp;&nbsp;close configuration select
+               </button>
+            </div> 
+         </div>
+      </div>
+      <div class="column is-6">
+         <h1 class="title is-1">Configuracion</h1>
+         <div class="block" id="block-content"></div>
+      </div>
+      <div class="column is-3"></div>
+   </div>
+
+   <!-- seccion del modal -->
+	<div class="modal" >
+		<div class="modal-background" id="bgmodal" ></div>
+		<div class="modal-content" id="contenido-modal" style="width: 80%; margin-left: 10%; height:auto;"></div>
+   </div>
+
+   <!-- secciones de js y jqyery -->
+	<script type="text/javascript" src="./javascripts/JQuery360.js"></script>
+	<script type="text/javascript" src="./javascripts/mustache.min.js"></script>
+	<script> 
+		const bgmodal = document.querySelector('#bgmodal')
+      const modal = document.querySelector('.modal')
+		var contentModal = document.querySelector('#contenido-modal');
+		bgmodal.addEventListener('click',()=>{
+			modal.classList.remove('is-active')
+		})
+	</script>
+   <script type="text/javascript" src="./javascripts/configuracion.js"></script>
+</body>
+</html>

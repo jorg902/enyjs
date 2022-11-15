@@ -1,0 +1,116 @@
+<div class="panel has-background-white" style="padding: 2%;">
+    <h4 id="nombretomadoparasubirarchivos" class="subtitle is-4 has-text-primary-dark has-text-weight-bold"><%= datosOut.subject %></h4>
+    <div class="columns is-variable">
+        <div class="column is-4">
+            <label class="label">*Correo a usar</label>
+            <div class="field">
+                <div class="select" style="width:100%;">
+                    <select name="email" id="email_"  style="width:100%;">
+                        <option value="">Seleccione correo</option>
+                        <% emailsmtp.forEach( item=>{ %>
+                            <option value="<%= item.email %>"><%= item.email %></option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="column is-2">
+            <label class="label">*Usuario</label>
+            <div>
+                <input class="input" type="text" value="<%= datosOut.usuario %>" name="usuario" id="usuario_" placeholder="EX" >
+                <input type="hidden" value="<%= datosOut.messageId %>" name="messageId" id="messageId_" >
+                <input type="hidden" value="<%= datosOut.date %>" id="date_" name="date">
+                <input type="hidden" value="<%= datosOut.references %>" id="references" name="references">
+                <input type="hidden" value="<%= datosOut.modo %>" id="modo" name="modo">
+                <input type="hidden" value="<%= datosOut.subject %>" name="subject" id="subject_" >
+                <input type="hidden" name="idcorreo" id="idcorreo" value="<%= datosOut.id %>">
+                <input type="hidden" name="folioemail" value="<%= datosOut.folioemail %>" id="folioemail">
+            </div>
+        </div>
+        <div class="column is-2">
+            <label class="label">Estado</label>
+            <div class="field">
+                <div class="select" style="width:100%;" >
+                    <select name="estado" id="estado_" style="width:100%;">
+                        <option value="atendiendo">Atendiendo</option>
+                        <option value="close">Cerrado</option>
+                        <option value="notificacion">Cerrado sin respuesta</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="column is-2">          
+            <div class="field" >
+                <label  for="fileUpload" class="label" >Adjuntos</label>
+                <div class="file is-warning">
+                    <label class="file-label">
+                        <input class="file-input" type="file" onchange="previewFile()"  />
+                        <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="ti-upload"></i>
+                            </span>
+                            <span class="file-label">
+                                elige archivo
+                            </span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="column is-2">
+            <label class="label">Accion</label>
+            <div class="field">
+                <button class="button is-primary has-text-weight-bold" onclick="getDataResponse(); return false;">Responder&nbsp;<i class="ti-share"></i> </button>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-12">
+            <div id="adjuntosMail"></div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-6">
+            <label class="label">Para</label>
+            <div class="field">
+                <input class="input" type="text" value="<%= datosOut.to %>" name="to" readonly >
+                <input class="input" type="hidden" value="<%= datosOut.to %>" name="to" id="to_" >
+            </div>
+        </div>
+        <div class="column is-3">
+            <label class="label">Fuerza de venta</label>
+            <div class="field">
+                <input class="input" type="text" name="fuerzaDeVenta" id="fuerzaDeVenta_"  placeholder="Ejemplo: DUQ1">
+            </div>
+        </div>
+        
+        <div class="column is-3">
+            <label class="label">Codificacion</label>
+            <div class="field">
+                <div class="select">
+                    <select class="browser-default" name="codificacion" id="codificacion_">
+                        <% codificacion.forEach( item =>{ %>
+                            <option value="<%= item.codificacion %>" ><%= item.codificacion %></option>
+                        <% }); %>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-12">
+            <label class="label" title="separe los correos usando coma (,)" >cc</label>
+            <div class="field">
+                <input class="input" type="text" value="<%= datosOut.cc %>" name="cc" id="cc_" placeholder="separe los correos usando coma (,)" >
+            </div>          
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-12" >
+            <label class="label">*Respuesta</label>
+            <textarea class="input" name="msg" id="msg_" cols="20" rows="50" placeholder="respuesta..." style="width: 100%; height: 87px; resize: none; border:none; border:1px #ccc solid;" ></textarea>
+        </div>
+    </div>
+</div>
+    

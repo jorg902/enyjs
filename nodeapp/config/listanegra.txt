@@ -1,0 +1,6 @@
+handle feedback transfer notification tempate
+mensaje de prueba de microsoft outlook
+delivery notification: delivery has failed
+Postmaster@xiang.telcel.com
+Undelivered Mail Returned to Sender
+jorg902@gmail.com

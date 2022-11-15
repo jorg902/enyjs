@@ -1,0 +1,24 @@
+
+<div class="block">
+   <div class="field p-2" style="box-shadow: 0px 0px 1px 1px #cecece;">
+      <h3 class="title is-3">Wrong email list</h3>
+      <div class="columns is-desktop">
+         <div class="column is-6">
+            <p class="p-3 has-background-warning-light" >
+               <strong>Nota:</strong>
+               <small>Evite/Elimine cualquier salto de linea vacio</small>
+            </p>
+         </div>
+         <div class="column is-6">
+            <p class="has-text-right">
+               <button class="button is-info" onclick="updateBlackList(); return false;">
+                  <i class="ti-save"></i>&nbsp;&nbsp;
+                  Update
+               </button>
+            </p>
+            
+         </div>
+      </div>
+      <textarea class="textarea" name="blockmails" id="blockmails" style="width: 100%; max-width: 712px; height: 50vh; resize: none;" ><%= blacklist %></textarea>
+   </div>
+</div>

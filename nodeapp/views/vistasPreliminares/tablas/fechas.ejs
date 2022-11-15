@@ -1,0 +1,54 @@
+    <div class="columns">
+        <div class="column is-2">
+            <label class="label" for="fi">F. Inicial</label>
+            <input class="input" type="date" id="fi" name="fi">
+        </div>
+        
+        <div class="column is-2">
+            <label class="label" for="ff">F. Final</label>
+            <input class="input" type="date" id="ff" name="ff">
+        </div>
+        
+        <div class="column is-2">
+            <div class="field">
+                <label class="label" for="estado">Estado</label>
+                <div class="select">
+                    <select class="select" name="estado" id="estado">
+                        <option value="completo">Completo</option>
+                        <option value="attending">ATENDIENDO</option>
+                        <option value="close">CERRRADO</option>
+                        <option value="complete">COMPLETO</option>
+                        <option value="new">NUEVO</option>
+                        <option value="pending">PENDIENTE</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="column is-2">
+            <label class="label" for="">Codificación</label>
+            <div class="select">
+                <select name="codificacion" id="codificacion">
+                    <option value="completo">Completo</option>
+                    <option value="Aclaracion de Saldo">Aclaracion de Saldo</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="column is-2">
+            <label class="label" for="">Personal</label>
+            <div class="select">
+                <select class="select" name="personal" id="personal">
+                    <option value="completo">Completo</option>
+                    <option value="jorgepech">Jorge Pech</option>
+                </select>
+            </div> 
+        </div>-->
+
+        <div class="column is-2">
+            <label class="label" for=""></label>
+            <button class="button is-info" id="verReporte" onclick="getExcel(); return false;">VER</button>
+
+        </div>
+    </div>

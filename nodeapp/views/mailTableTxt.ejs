@@ -1,0 +1,50 @@
+<table class="table is-bordered is-hoverable">
+   <thead>
+      <tr>
+         <th>Email</th>
+         <th>Type</th>
+         <th>Edit</th>
+         <th>Delete</th>
+      </tr>
+   </thead>
+   <tbody>
+      <% 
+      if(pop.length > -1){ %>
+         <% pop.forEach( item => {  %>
+            <tr>
+               <td><%= item %></td>
+               <td>POP3</td>
+               <td>
+                  <button class="button is-info is-small" onclick="editMailActive('<%= item %>'); return false;" >
+                     <i class="ti-pencil"></i>&nbsp;&nbsp;Edit
+                  </button>
+               </td>
+               <td>
+                  <button class="button is-info is-small">
+                     <i class="ti-trash"></i>&nbsp;&nbsp;Delete
+                  </button>
+               </td>
+            </tr>
+         <% }) %>
+      <% } %>
+
+      <% if(smtp.length > -1){ %>
+         <% smtp.forEach( item => {  %>
+            <tr>
+               <td><%= item %></td>
+               <td>POP3</td>
+               <td>
+                  <button class="button is-info is-small" onclick="editMailActive('<%= item %>'); return false;" >
+                     <i class="ti-pencil"></i>&nbsp;Edit
+                  </button>
+               </td>
+               <td>
+                  <button class="button is-info is-small">
+                     <i class="ti-trash"></i>&nbsp;&nbsp;Delete
+                  </button>
+               </td>
+            </tr>
+         <% }) %>
+      <% } %>
+   </tbody>
+</table>

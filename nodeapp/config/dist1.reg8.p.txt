@@ -1,0 +1,2 @@
+username=dist1.reg8@mail.telcel.com
+password=dddtttr8

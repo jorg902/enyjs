@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+   <link rel="stylesheet" href="/themify-icons/themify-icons.css">
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+   <title>Document</title>
+   <script>
+      function createSpacePage(listaMensajes){
+         console.log(listaMensajes)
+         var lista = JSON.parse(listaMensajes)
+         var allRegistre = lista.length;
+         var perPage = 20; //input lateral para indicar cuantos se muestran
+         if(allRegistre > perPage){
+            document.querySelector('#after-btn').disabled=false;
+         }
+      }
+
+      function clickNext(){
+         var pag = document.querySelector('#now-btn').innerHTML;
+         var siguiente = parseInt(pag) + 1;
+         if(parseInt(siguiente) > 1){ document.querySelector('#before-btn').disabled=false; }
+         document.querySelector('#now-btn').innerHTML = siguiente;
+      }
+
+      function clickBefore(){
+         var pag = document.querySelector('#now-btn').innerHTML;
+         var siguiente = parseInt(pag) - 1;
+         if(parseInt(siguiente) == 1){ document.querySelector('#before-btn').disabled=true; }
+         document.querySelector('#now-btn').innerHTML = siguiente;
+      }
+
+      function checkPage(pag){    
+         var perPage = 20; //input lateral para indicar cuantos se muestran
+         switch(pag){
+            case 1: 
+               var startLimit = pag * 0;
+               console.log(`limit ${startLimit},${perPage}`);
+               break;
+            default:
+               var startLimit = (pag-1) * perPage;
+               console.log(`limit ${startLimit},${perPage}`);
+               break;
+         }
+      }
+   </script>
+</head>
+<body>
+
+   <div class="columns is-desktop">
+      <div class="column is-4">
+         <ul class="menu-list" style="border: 1px black solid;">
+            <li>
+               <a>
+                  <div class="block" style="width: 100%; height: 5px;">
+                     <div style="width: 75%; border:1px red solid; float: left;">
+                        <strong style="width: 20%;">123456</strong>&nbsp;
+                        <i class="ti-file" style="width: 5%;"></i>
+                        <span class="has-text-weight-bold" style="font-size:1rem; width: 50%;" title="{{}}" >&nbsp;jorge.pech@ccservices.com.mx</span>
+                     </div>
+                     <div style="width: 25%; border:1px blue solid; float: right;">
+                        <small style="width: 100%;">2022-11-14 13:20:34</small>
+                     </div>
+                  </div>
+                  <div style="width:100%;">
+                     <div style="width:100%;">
+                        <div style="width:80%; float: left;">
+                           <span class="has-text-primary-dark">Este sera el asunto del  ir mas texto...</span>
+                        </div>
+                        <div style="width:20%; float: right;">
+                           <strong style="text-align:right;">&nbsp;estado</strong>
+                        </div>
+                     </div>
+                  </div>
+               </a>
+            </li>
+         </ul>
+      </div>
+      <div class="column is-8">
+
+      </div>
+   </div>
+
+   
+
+</body>
+</html>

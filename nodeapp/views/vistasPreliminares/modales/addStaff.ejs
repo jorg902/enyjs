@@ -1,0 +1,104 @@
+<link rel="stylesheet" href="stylesheets/style.css">
+<form action="#" id="validarInfo" class="has-background-white-ter">
+    <div class="panel p-4" id="contenedor-modal">
+
+        <div class="mb-2" id="titulo-form">
+            <p class="panel-heading has-text-link"><em>Agregar Personal</em></p>
+        </div>
+
+        <div class="columns">
+            <div class="column is-3">
+                <div class="field">
+                    <label class="label">Nombres</label>
+                    <div class="control">
+                        <input class="input" type="text" id="nombres" name="nombres" placeholder="Solo nombres" maxlength="100" autocomplete="off" required>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-3">
+                <div class="field">
+                    <label class="label">Apellidos</label>
+                    <div class="control">
+                        <input class="input" type="text" id="apellidos" name="apellidos" placeholder="Solo apellidos" maxlength="100" autocomplete="off" required>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-3">
+                <div class="field">
+                    <label class="label">E-mail</label>
+                    <div class="control">
+                        <input class="input" type="text" id="email" name="email"  placeholder="ejemplo@dominio.com" maxlength="100" autocomplete="off" required>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-3">
+                <div class="field">
+                    <label class="label">Departamento</label>
+                    <div class="control">
+                        <div class="select">
+                            <select  name="depto" id="depto">
+                                <option value="*555">*555</option>
+                                <option value="sistemas">SISTEMAS</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column is-12">
+                <div class="field">
+                    <label class="label">Firma</label>
+                    <div class="control">
+                        <input class="input" type="file" accept=".png, .jpg, .jpeg" id="firma" name="firma">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column is-3">
+                <div class="field">
+                    <label class="label">Usuario/EX</label>
+                    <div class="control">
+                        <input class="input" type="text" id="usuario" name="usuario" placeholder="Usuario o EX..." onkeypress="" maxlength="100" required>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-3">
+                <div class="field">
+                    <label class="label">Contraseña</label>
+                    <div class="control">
+                        <input class="input" type="password" id="contrasenia" name="contrasenia" placeholder="Mín. 10 caracteres" onkeypress="" maxlength="32" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="column is-3">
+                <div class="field">
+                    <label class="label">Privilegio/Rol</label>
+                    <div class="control">
+                        <div class="select">
+                            <select  name="privilegio" id="privilegio">
+                                <option value="asesor">ASESOR</option>
+                                <option value="coordinador">COORDINADOR</option>
+                                <option value="estandar">ESTÁNDAR</option>
+                                <option value="supervisor">SUPERVISOR</option>
+                                <option value="admin">ADMIN</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-3">
+                <div class="field">
+                    <label class="label" for="registrar">Acción</label>
+                    <div class="control">
+                        <button class="button has-background-primary is-fullwidth" id="btn-registrar" onclick="saveStaff(); return false;">Registrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
